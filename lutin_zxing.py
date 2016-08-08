@@ -131,7 +131,11 @@ def create(target, module_name):
 		])
 	# build in C mode
 	my_module.compile_version("c++", 2003)
-	my_module.add_module_depend('cxx')
+	my_module.add_module_depend([
+	    'cxx',
+	    'm',
+	    'pthread'
+	    ])
 	#my_module.add_path(os.path.join(tools.get_current_path(__file__), "zxing-cpp", "core", "src"))
 	my_module.compile_flags('c++', [
 		"-D_CRT_SECURE_NO_WARNINGS"
