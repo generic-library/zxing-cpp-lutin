@@ -38,7 +38,7 @@ def create(target, module_name):
 	# build in C mode
 	my_module.compile_version("c++", 2003)
 	my_module.add_path(os.path.join(tools.get_current_path(__file__), "zxing-cpp", "cli", "src"))
-	my_module.add_module_depend('zxing')
+	my_module.add_depend('zxing')
 	return my_module
 
 

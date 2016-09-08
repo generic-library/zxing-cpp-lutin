@@ -131,19 +131,20 @@ def create(target, module_name):
 		])
 	# build in C mode
 	my_module.compile_version("c++", 2003)
-	my_module.add_module_depend([
+	my_module.add_depend([
 	    'cxx',
 	    'm',
 	    'pthread'
 	    ])
 	#my_module.add_path(os.path.join(tools.get_current_path(__file__), "zxing-cpp", "core", "src"))
-	my_module.compile_flags('c++', [
+	my_module.add_flag('c++', [
 		"-D_CRT_SECURE_NO_WARNINGS"
 		])
-	#my_module.add_optionnal_module_depend('iconv', [], ["c", "-DNO_ICONV=1"])
-	my_module.add_export_flag('c++', [
+	#my_module.add_optionnal_depend('iconv', [], ["c", "-DNO_ICONV=1"])
+	my_module.add_flag('c++', [
 		"-DNO_ICONV=1"
-		])
+		],
+		export=True)
 
 	my_module.add_header_file([
 		"zxing-cpp/core/src/bigint/BigUnsignedInABase.hh",
@@ -299,7 +300,7 @@ def create(target, module_name):
 		"zxing-cpp/core/src/zxing/FormatException.h"
 		], destination_path="zxing")
 	
-	if target.name=="Windows":
+	if "Windows" in target.get_type():
 		my_module.add_src_file([
 			"zxing-cpp/core/src/win32/zxing/win_iconv.c"
 			])
