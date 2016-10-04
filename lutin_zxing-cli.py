@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import lutin.module as module
+import lutin.debug as debug
 import lutin.tools as tools
 import os
 
@@ -27,18 +27,17 @@ def get_maintainer():
 def get_version():
 	return [0,0]
 
-def create(target, module_name):
-	my_module = module.Module(__file__, module_name, get_type())
+def configure(target, my_module):
 	my_module.add_src_file([
-		"zxing-cpp/cli/src/jpgd.cpp",
-		"zxing-cpp/cli/src/lodepng.cpp",
-		"zxing-cpp/cli/src/ImageReaderSource.cpp",
-		"zxing-cpp/cli/src/main.cpp",
-		])
+	    "zxing-cpp/cli/src/jpgd.cpp",
+	    "zxing-cpp/cli/src/lodepng.cpp",
+	    "zxing-cpp/cli/src/ImageReaderSource.cpp",
+	    "zxing-cpp/cli/src/main.cpp",
+	    ])
 	# build in C mode
 	my_module.compile_version("c++", 2003)
-	my_module.add_path(os.path.join(tools.get_current_path(__file__), "zxing-cpp", "cli", "src"))
+	my_module.add_path("zxing-cpp/cli/src")
 	my_module.add_depend('zxing')
-	return my_module
+	return True
 
 
